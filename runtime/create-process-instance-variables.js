@@ -11,8 +11,6 @@ export async function createProcessInstanceVariables(processInstanceId, variable
     vars = Object.entries(variables).map(([name, value]) => ({ name, value }))
   }
 
-  console.log(vars)
-
   await flowableFetch(`runtime/process-instances/${processInstanceId}/variables`, {
     method: 'POST',
     body: vars,
