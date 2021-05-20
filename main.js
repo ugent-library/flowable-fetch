@@ -12,3 +12,5 @@ export * from './management/move-deadletter-job'
 
 export * from './history/historic-task-instances'
 export * from './history/historic-variable-instances'
+
+export * from './query/process-instances'
