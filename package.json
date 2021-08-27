@@ -4,7 +4,7 @@
   "description": "Custom Node.js fetch method for the Flowable BPMN REST API",
   "main": "index.js",
   "module": "main.js",
-  "repository": "git@github.ugent.be:koeverhe/flowable-fetch.git",
+  "repository": "git@github.ugent.be:Universiteitsbibliotheek/flowable-fetch.git",
   "author": "Koen Verheyen <koen.verheyen@inuits.eu>",
   "license": "MIT",
   "dependencies": {
