@@ -1,6 +1,6 @@
 {
   "name": "flowable-fetch",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Custom Node.js fetch method for the Flowable BPMN REST API",
   "main": "index.js",
   "module": "main.js",
