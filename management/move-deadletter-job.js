@@ -1,4 +1,4 @@
-import flowableFetch from '../flowable-fetch'
+import flowableFetch from '../flowable-fetch.js'
 
 export async function moveDeadletterJob(id) {
   return await flowableFetch(`management/deadletter-jobs/${id}`, {

@@ -1,4 +1,4 @@
-import flowableFetch from '../flowable-fetch'
+import flowableFetch from '../flowable-fetch.js'
 
 export async function listProcessDefinitions(params) {
   return await flowableFetch('repository/process-definitions', { params })

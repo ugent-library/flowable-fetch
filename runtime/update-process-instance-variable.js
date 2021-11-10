@@ -1,4 +1,4 @@
-import flowableFetch from '../flowable-fetch'
+import flowableFetch from '../flowable-fetch.js'
 
 export async function updateProcessInstanceVariable(processInstanceId, name, value) {
   return await flowableFetch(`runtime/process-instances/${processInstanceId}/variables/${name}`, {
