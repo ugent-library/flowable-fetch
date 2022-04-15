@@ -1,25 +1,11 @@
 import { queryProcessInstances } from './process-instances'
+import defaultResultSetTest from '../test-utils/default-resultset-test'
 
 describe('The queryProcessInstances() method', () => {
-  it('should return a set of process instances', async () => {
-    const results = await queryProcessInstances({})
-
-    expect(results).to.have.all.keys([
-      'data',
-      'sort',
-      'order',
-      'start',
-      'size',
-      'total',
-    ])
-
-    expect(results).to.have.property('data').with.lengthOf(10)
-    expect(results).to.have.property('sort', 'id')
-    expect(results).to.have.property('order', 'asc')
-    expect(results).to.have.property('start', 0)
-    expect(results).to.have.property('size', 10)
-    expect(results).to.have.property('total').above(10)
-  })
+  it(
+    'should return a set of process instances',
+    defaultResultSetTest(() => queryProcessInstances({}), 'id')
+  )
 
   it('should be possible to filter by processDefinitionKey', async () => {
     const results = await queryProcessInstances({
