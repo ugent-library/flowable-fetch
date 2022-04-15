@@ -1,4 +1,8 @@
-export default function defaultResultSetTest(testCallback, defaultSortColumn) {
+export default function defaultResultSetTest(
+  testCallback,
+  defaultSortColumn,
+  testPredicate = null
+) {
   return async () => {
     const results = await testCallback()
 
@@ -17,5 +21,9 @@ export default function defaultResultSetTest(testCallback, defaultSortColumn) {
     expect(results).to.have.property('start', 0)
     expect(results).to.have.property('size', 10)
     expect(results).to.have.property('total').above(10)
+
+    if (typeof testPredicate === 'function') {
+      results.data.forEach(testPredicate)
+    }
   }
 }
