@@ -3,9 +3,21 @@ import defaultResultSetTest from '../test-utils/default-resultset-test'
 
 describe('The listHistoricTaskInstances() method', () => {
   it(
-    'should return a set of task instances',
+    'should return a set of historic task instances',
     defaultResultSetTest(listHistoricTaskInstances, 'taskInstanceId')
   )
+
+  it('should be possible to filter for finished task instances', async () => {
+    const results = await listHistoricTaskInstances({
+      finished: true,
+    })
+
+    expect(results).to.have.property('data').with.lengthOf(10)
+
+    for (const taskInstance of results.data) {
+      expect(taskInstance.endTime).to.not.be.null
+    }
+  })
 
   it('should be possible to filter by taskDefinitionKey', async () => {
     const results = await listHistoricTaskInstances({
