@@ -1,4 +1,4 @@
-import flowableFetch from '../flowable-fetch.js'
+import flowableFetch from '../lib/flowable-fetch.js'
 import { objectToVariables } from '../lib/util.js'
 
 export async function createProcessInstanceVariables(processInstanceId, variables) {
