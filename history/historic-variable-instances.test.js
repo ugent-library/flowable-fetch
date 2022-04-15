@@ -3,7 +3,7 @@ import defaultResultSetTest from '../test-utils/default-resultset-test'
 
 describe('The listHistoricVariableInstances() method', () => {
   it(
-    'should return a set of variable instances',
+    'should return a set of historic variable instances',
     defaultResultSetTest(listHistoricVariableInstances, 'variableName')
   )
 
