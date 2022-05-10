@@ -1,7 +1,10 @@
 import flowableFetch from '../lib/flowable-fetch.js'
 
-export async function getResourceContent(deploymentId, resourceName) {
+export async function getResourceContent(deploymentId, resourceId) {
   return await flowableFetch(
-    `repository/deployments/${deploymentId}/resourcedata/${resourceName}`
+    `repository/deployments/${deploymentId}/resourcedata/${resourceId}`,
+    {
+      returnText: true,
+    }
   )
 }
