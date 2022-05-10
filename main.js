@@ -20,3 +20,4 @@ export * from './query/process-instances.js'
 
 export * from './repository/list-process-definitions.js'
 export * from './repository/suspend-process-definition.js'
+export * from './repository/get-resource-content.js'
