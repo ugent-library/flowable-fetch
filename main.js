@@ -15,6 +15,7 @@ export * from './management/move-timer-job.js'
 
 export * from './history/historic-task-instances.js'
 export * from './history/historic-variable-instances.js'
+export * from './history/delete-historic-process-instance.js'
 
 export * from './query/process-instances.js'
 
