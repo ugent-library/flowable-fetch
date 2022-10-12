@@ -45,13 +45,13 @@ describe('The listHistoricTaskInstances() method', () => {
 
   it('should be possible to filter by processInstanceId', async () => {
     const results = await listHistoricTaskInstances({
-      processInstanceId: '21435889',
+      processInstanceId: '25726214',
     })
 
     expect(results).to.have.property('data').with.lengthOf(10)
 
     for (const taskInstance of results.data) {
-      expect(taskInstance.processInstanceId).to.equal('21435889')
+      expect(taskInstance.processInstanceId).to.equal('25726214')
     }
   })
 })
