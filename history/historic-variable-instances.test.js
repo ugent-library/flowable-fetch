@@ -25,13 +25,13 @@ describe('The listHistoricVariableInstances() method', () => {
 
   it('should be possible to filter by processInstanceId', async () => {
     const results = await listHistoricVariableInstances({
-      processInstanceId: '18088203',
+      processInstanceId: '12975801',
     })
 
-    expect(results).to.have.property('data').with.lengthOf(10)
+    expect(results).to.have.property('data').with.lengthOf(10) // Default page size
 
     for (const variableInstance of results.data) {
-      expect(variableInstance.processInstanceId).to.equal('18088203')
+      expect(variableInstance.processInstanceId).to.equal('12975801')
     }
   })
 })
