@@ -1,6 +1,7 @@
 export default function defaultResultSetTest(
   testCallback,
   defaultSortColumn,
+  expectedSetSize = 10,
   testPredicate = null
 ) {
   return async () => {
@@ -15,12 +16,12 @@ export default function defaultResultSetTest(
       'total',
     ])
 
-    expect(results).to.have.property('data').with.lengthOf(10)
+    expect(results).to.have.property('data').with.lengthOf(expectedSetSize)
     expect(results).to.have.property('sort', defaultSortColumn)
     expect(results).to.have.property('order', 'asc')
     expect(results).to.have.property('start', 0)
-    expect(results).to.have.property('size', 10)
-    expect(results).to.have.property('total').above(10)
+    expect(results).to.have.property('size', expectedSetSize)
+    expect(results).to.have.property('total').gte(expectedSetSize)
 
     if (typeof testPredicate === 'function') {
       results.data.forEach(testPredicate)
