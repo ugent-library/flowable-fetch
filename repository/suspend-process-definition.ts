@@ -4,7 +4,7 @@ import flowableFetch from '../lib/flowable-fetch'
 export async function suspendProcessDefinition(
   id: string,
   includeProcessInstances = false
-) {
+): Promise<ProcessDefinition> {
   return await flowableFetch<ProcessDefinition>(
     `repository/process-definitions/${id}`,
     {

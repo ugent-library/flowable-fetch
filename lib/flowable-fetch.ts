@@ -8,11 +8,12 @@ type FlowableFetchInit = {
   allowedFailStatuses?: number[]
 }
 
-export default async function flowableFetch<T>(
+export default async function flowableFetch<T = void>(
   route: string,
   options: FlowableFetchInit = {}
-) {
+): Promise<T> {
   const response = await doFetch(route, options)
+
   return (await response.json()) as T
 }
 

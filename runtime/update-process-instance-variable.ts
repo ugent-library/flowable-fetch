@@ -5,7 +5,7 @@ export async function updateProcessInstanceVariable(
   processInstanceId: string,
   name: string,
   value: VariableValue
-) {
+): Promise<Variable> {
   return await flowableFetch<Variable>(
     `runtime/process-instances/${processInstanceId}/variables/${name}`,
     {

@@ -7,35 +7,119 @@ type ListResponse<T> = {
     total: number;
 };
 type VariableValue = string | number | boolean | null;
+type VariableType = 'string' | 'short' | 'integer' | 'long' | 'double' | 'boolean' | 'date';
 type Variable = {
     name: string;
     value: VariableValue;
-    type?: 'string' | 'short' | 'integer' | 'long' | 'double' | 'boolean' | 'date';
+    type?: VariableType;
+    variableScope?: 'global' | 'local';
 };
-type ProcessDefinition = {};
+type ProcessDefinition = {
+    id: string;
+    url: string;
+    version: number;
+    key: string;
+    category: string;
+    suspended: boolean;
+    name: string;
+    description: string;
+    deploymentId: string;
+    deploymentUrl: string;
+    graphicalNotationDefined: boolean;
+    resource: string;
+    diagramResource: string;
+    startFormDefined: boolean;
+};
 type ProcessInstance = {
-    processDefinitionId: string;
+    id: string;
+    url: string;
+    businessKey: string;
+    suspended: boolean;
+    processDefinitionUrl: string;
+    activityId: string;
+    tenantId: string | null;
 };
-type Task = {};
-type Job = {};
-type HistoricTaskInstance = {
-    processDefinitionId: string;
+type Task = {
+    assignee: string;
+    createTime: string;
+    delegationState: string;
+    description: string;
+    dueDate: string;
+    execution: string;
+    id: string;
+    name: string;
+    owner: string;
+    parentTask: string;
+    priority: number;
+    processDefinitionUrl: string;
+    processInstanceUrl: string;
+    suspended: boolean;
+    taskDefinitionKey: string;
+    url: string;
+    tenantId: string | null;
+};
+type Job = {
+    id: string;
+    url: string;
     processInstanceId: string;
+    processInstanceUrl: string;
+    processDefinitionId: string;
+    processDefinitionUrl: string;
+    executionId: string;
+    executionUrl: string;
+    retries: number;
+    exceptionMessage: string | null;
+    dueDate: string;
+    tenantId: string | null;
+};
+type HistoricTaskInstance = {
+    id: string;
+    processDefinitionId: string;
+    processDefinitionUrl: string;
+    processInstanceId: string;
+    processInstanceUrl: string;
+    executionId: string;
+    name: string;
+    description: string;
+    deleteReason: string | null;
+    owner: string;
+    assignee: string;
     startTime: string;
     endTime: string;
+    durationInMillis: number;
+    workTimeInMillis: number;
+    claimTime: string;
     taskDefinitionKey: string;
+    formKey: string | null;
+    priority: number;
+    dueDate: string;
+    parentTaskId: string | null;
+    url: string;
+    taskVariables: Variable[];
+    processVariables: Variable[];
+    tenantId: string | null;
 };
 type HistoricVariableInstance = {
+    id: string;
+    processInstanceId: string;
+    processInstanceUrl: string;
+    taskId: string;
     variable: Variable;
 };
+type VariableQuery = {
+    name: string;
+    value: VariableValue;
+    operation: 'equals' | 'notEquals' | 'equalsIgnoreCase' | 'notEqualsIgnoreCase' | 'lessThan' | 'greaterThan' | 'lessThanOrEquals' | 'greaterThanOrEquals' | 'like';
+    type: VariableType;
+};
 
-declare function startProcessInstance(processDefinitionKey: string, variables?: Record<string, VariableValue> | Variable[]): Promise<unknown>;
+declare function startProcessInstance(processDefinitionKey: string, variables?: Record<string, VariableValue> | Variable[]): Promise<ProcessInstance>;
 
 type FlowableFetchParams = Record<string, string | number | boolean>;
 
 declare function listProcessInstances(params?: FlowableFetchParams): Promise<ListResponse<ProcessInstance>>;
 
-declare function getProcessInstanceVariable(processInstanceId: string, variableName: string): Promise<VariableValue>;
+declare function getProcessInstanceVariable(processInstanceId: string, variableName: string): Promise<VariableValue | null>;
 
 declare function deleteProcessInstance(processInstanceId: string): Promise<void>;
 
@@ -59,7 +143,11 @@ declare function listHistoricVariableInstances(params?: FlowableFetchParams): Pr
 
 declare function deleteHistoricProcessInstance(processInstanceId: string): Promise<void>;
 
-declare function queryProcessInstances(body: object): Promise<ListResponse<ProcessInstance>>;
+type Body = {
+    processDefinitionKey?: string;
+    variables?: VariableQuery[];
+};
+declare function queryProcessInstances(body: Body): Promise<ListResponse<ProcessInstance>>;
 
 declare function listProcessDefinitions(params?: FlowableFetchParams): Promise<ListResponse<ProcessDefinition>>;
 

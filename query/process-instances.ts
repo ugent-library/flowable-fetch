@@ -1,9 +1,14 @@
-import type { ListResponse, ProcessInstance } from '../flowable'
+import type { ListResponse, ProcessInstance, VariableQuery } from '../flowable'
 import flowableFetch from '../lib/flowable-fetch'
 
+type Body = {
+  processDefinitionKey?: string
+  variables?: VariableQuery[]
+}
+
 export async function queryProcessInstances(
-  body: object /* TODO: proper typing */
-) {
+  body: Body
+): Promise<ListResponse<ProcessInstance>> {
   return await flowableFetch<ListResponse<ProcessInstance>>(
     'query/process-instances',
     {
