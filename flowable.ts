@@ -45,11 +45,26 @@ export type ProcessDefinition = {
 export type ProcessInstance = {
   id: string
   url: string
-  businessKey: string
+  name: string | null
+  businessKey: string | null
+  businessStatus: string | null
   suspended: boolean
+  ended: boolean
+  processDefinitionId: string
   processDefinitionUrl: string
-  activityId: string
-  tenantId: string | null
+  processDefinitionName: string
+  processDefinitionDescription: string | null
+  activityId: string | null
+  startUserId: string | null
+  startTime: Date
+  variables: Variable[]
+  callbackId: string | null
+  callbackType: string | null
+  referenceId: string | null
+  referenceType: string | null
+  propagatedStageInstanceId: string | null
+  tenantId: string
+  completed: boolean
 }
 
 export type Task = {
@@ -136,5 +151,10 @@ export type VariableQuery = {
     | 'lessThanOrEquals'
     | 'greaterThanOrEquals'
     | 'like'
-  type: VariableType
+  type?: VariableType
+}
+
+export type ErrorResponse = {
+  message: string
+  exception: string
 }

@@ -1,4 +1,10 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "cSpell.words": ["deadletter", "flowable", "Millis", "resourcedata"]
+  "cSpell.words": [
+    "deadletter",
+    "flowable",
+    "Millis",
+    "resourcedata",
+    "resultset"
+  ]
 }

@@ -102,7 +102,8 @@ function doFetch(_0) {
       ([name, value]) => url.searchParams.append(name, String(value))
     );
     const headers = new Headers(__spreadValues({
-      Authorization: `Basic ${authSecret()}`
+      Authorization: `Basic ${authSecret()}`,
+      Accept: "application/json"
     }, headersInit));
     const init = {
       method,
@@ -116,7 +117,13 @@ function doFetch(_0) {
     if (response.ok === true || allowedFailStatuses.includes(response.status)) {
       return response;
     } else {
-      throw Error(yield response.text());
+      if (response.headers.get("Content-Type") === "application/json") {
+        const error = yield response.json();
+        throw new Error(`${error.message}: ${error.exception}`);
+      } else {
+        const responseText = yield response.text();
+        throw new Error(responseText != null ? responseText : response.statusText);
+      }
     }
   });
 }
