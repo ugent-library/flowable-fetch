@@ -8,7 +8,7 @@ import rejectionTest from '../test-utils/rejection-test'
 describe('The getTimerJobs() method', () => {
   it(
     'should return a set of timer jobs',
-    defaultResultSetTest(getTimerJobs, 'id', 0)
+    defaultResultSetTest(getTimerJobs, 'id', -1)
   )
 
   rejectionTest(

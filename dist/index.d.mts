@@ -121,6 +121,12 @@ type HistoricVariableInstance = {
     taskId: string;
     variable: Variable;
 };
+type PagingAndSorting = {
+    sort?: string;
+    order?: 'asc' | 'desc';
+    start?: number;
+    size?: number;
+};
 type VariableQuery = {
     name: string;
     value: VariableValue;
@@ -158,7 +164,7 @@ declare function listHistoricVariableInstances(params?: FlowableFetchParams): Pr
 
 declare function deleteHistoricProcessInstance(processInstanceId: string): Promise<void>;
 
-type Body = {
+type Body = PagingAndSorting & {
     processDefinitionKey?: string;
     variables?: VariableQuery[];
 };

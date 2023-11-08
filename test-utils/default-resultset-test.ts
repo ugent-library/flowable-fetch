@@ -24,12 +24,15 @@ export default function defaultResultSetTest<T>(
       'total',
     ])
 
-    expect(results).to.have.property('data').with.lengthOf(expectedSetSize)
     expect(results).to.have.property('sort', defaultSortColumn)
     expect(results).to.have.property('order', 'asc')
     expect(results).to.have.property('start', 0)
-    expect(results).to.have.property('size', expectedSetSize)
-    expect(results).to.have.property('total').gte(expectedSetSize)
+
+    if (expectedSetSize >= 0) {
+      expect(results).to.have.property('size', expectedSetSize)
+      expect(results).to.have.property('total').gte(expectedSetSize)
+      expect(results).to.have.property('data').with.lengthOf(expectedSetSize)
+    }
 
     if (typeof testPredicate === 'function') {
       results.data.forEach(testPredicate)

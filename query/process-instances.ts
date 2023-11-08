@@ -1,7 +1,12 @@
-import type { ListResponse, ProcessInstance, VariableQuery } from '../flowable'
+import type {
+  ListResponse,
+  PagingAndSorting,
+  ProcessInstance,
+  VariableQuery,
+} from '../flowable'
 import flowableFetch from '../lib/flowable-fetch'
 
-type Body = {
+type Body = PagingAndSorting & {
   processDefinitionKey?: string
   variables?: VariableQuery[]
 }

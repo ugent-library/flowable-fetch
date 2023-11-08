@@ -138,6 +138,13 @@ export type HistoricVariableInstance = {
   variable: Variable
 }
 
+export type PagingAndSorting = {
+  sort?: string
+  order?: 'asc' | 'desc'
+  start?: number
+  size?: number
+}
+
 export type VariableQuery = {
   name: string
   value: VariableValue
