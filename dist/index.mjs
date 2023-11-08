@@ -278,6 +278,16 @@ function queryProcessInstances(body) {
   });
 }
 
+// query/tasks.ts
+function queryTasks(body) {
+  return __async(this, null, function* () {
+    return yield flowableFetch("query/tasks", {
+      method: "POST",
+      body
+    });
+  });
+}
+
 // repository/list-process-definitions.ts
 function listProcessDefinitions(params) {
   return __async(this, null, function* () {
@@ -328,6 +338,7 @@ export {
   moveDeadletterJob,
   moveTimerJob,
   queryProcessInstances,
+  queryTasks,
   startProcessInstance,
   suspendProcessDefinition,
   updateProcessInstanceVariable

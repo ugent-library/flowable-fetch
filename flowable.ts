@@ -68,23 +68,40 @@ export type ProcessInstance = {
 }
 
 export type Task = {
-  assignee: string
-  createTime: string
-  delegationState: string
-  description: string
-  dueDate: string
-  execution: string
   id: string
-  name: string
-  owner: string
-  parentTask: string
-  priority: number
-  processDefinitionUrl: string
-  processInstanceUrl: string
-  suspended: boolean
-  taskDefinitionKey: string
   url: string
+  owner: string | null
+  assignee: string
+  delegationState: string | null
+  name: string
+  description: string
+  createTime: Date
+  dueDate: string | null
+  priority: number
+  suspended: boolean
+  claimTime: string | null
+  taskDefinitionKey: string
+  scopeDefinitionId: string | null
+  scopeId: string | null
+  subScopeId: string | null
+  scopeType: string | null
+  propagatedStageInstanceId: string | null
   tenantId: string | null
+  category: string | null
+  formKey: string | null
+  parentTaskId: string | null
+  parentTaskUrl: string | null
+  executionId: string
+  executionUrl: string
+  processInstanceId: string
+  processInstanceUrl: string
+  processDefinitionId: string
+  processDefinitionUrl: string
+  variables: {
+    name: string
+    value: VariableValue
+    scope: 'global' | 'local'
+  }[]
 }
 
 export type Job = {

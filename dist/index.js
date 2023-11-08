@@ -69,6 +69,7 @@ __export(flowable_fetch_exports, {
   moveDeadletterJob: () => moveDeadletterJob,
   moveTimerJob: () => moveTimerJob,
   queryProcessInstances: () => queryProcessInstances,
+  queryTasks: () => queryTasks,
   startProcessInstance: () => startProcessInstance,
   suspendProcessDefinition: () => suspendProcessDefinition,
   updateProcessInstanceVariable: () => updateProcessInstanceVariable
@@ -316,6 +317,16 @@ function queryProcessInstances(body) {
   });
 }
 
+// query/tasks.ts
+function queryTasks(body) {
+  return __async(this, null, function* () {
+    return yield flowableFetch("query/tasks", {
+      method: "POST",
+      body
+    });
+  });
+}
+
 // repository/list-process-definitions.ts
 function listProcessDefinitions(params) {
   return __async(this, null, function* () {
@@ -367,6 +378,7 @@ function getResourceContent(deploymentId, resourceId) {
   moveDeadletterJob,
   moveTimerJob,
   queryProcessInstances,
+  queryTasks,
   startProcessInstance,
   suspendProcessDefinition,
   updateProcessInstanceVariable

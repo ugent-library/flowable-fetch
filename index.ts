@@ -18,6 +18,7 @@ export * from './history/historic-variable-instances'
 export * from './history/delete-historic-process-instance'
 
 export * from './query/process-instances'
+export * from './query/tasks'
 
 export * from './repository/list-process-definitions'
 export * from './repository/suspend-process-definition'

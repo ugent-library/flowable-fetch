@@ -55,23 +55,40 @@ type ProcessInstance = {
     completed: boolean;
 };
 type Task = {
-    assignee: string;
-    createTime: string;
-    delegationState: string;
-    description: string;
-    dueDate: string;
-    execution: string;
     id: string;
-    name: string;
-    owner: string;
-    parentTask: string;
-    priority: number;
-    processDefinitionUrl: string;
-    processInstanceUrl: string;
-    suspended: boolean;
-    taskDefinitionKey: string;
     url: string;
+    owner: string | null;
+    assignee: string;
+    delegationState: string | null;
+    name: string;
+    description: string;
+    createTime: Date;
+    dueDate: string | null;
+    priority: number;
+    suspended: boolean;
+    claimTime: string | null;
+    taskDefinitionKey: string;
+    scopeDefinitionId: string | null;
+    scopeId: string | null;
+    subScopeId: string | null;
+    scopeType: string | null;
+    propagatedStageInstanceId: string | null;
     tenantId: string | null;
+    category: string | null;
+    formKey: string | null;
+    parentTaskId: string | null;
+    parentTaskUrl: string | null;
+    executionId: string;
+    executionUrl: string;
+    processInstanceId: string;
+    processInstanceUrl: string;
+    processDefinitionId: string;
+    processDefinitionUrl: string;
+    variables: {
+        name: string;
+        value: VariableValue;
+        scope: 'global' | 'local';
+    }[];
 };
 type Job = {
     id: string;
@@ -164,11 +181,33 @@ declare function listHistoricVariableInstances(params?: FlowableFetchParams): Pr
 
 declare function deleteHistoricProcessInstance(processInstanceId: string): Promise<void>;
 
-type Body = PagingAndSorting & {
+type Body$1 = PagingAndSorting & {
     processDefinitionKey?: string;
     variables?: VariableQuery[];
 };
-declare function queryProcessInstances(body: Body): Promise<ListResponse<ProcessInstance>>;
+declare function queryProcessInstances(body: Body$1): Promise<ListResponse<ProcessInstance>>;
+
+type Body = PagingAndSorting & {
+    name?: string;
+    nameLike?: string;
+    description?: string;
+    assignee?: string;
+    assigneeLike?: string;
+    unassigned?: boolean;
+    taskDefinitionKey?: string;
+    taskDefinitionKeyLike?: string;
+    processInstanceId?: string;
+    processDefinitionId?: string;
+    processDefinitionKey?: string;
+    processDefinitionKeyLike?: string;
+    processDefinitionName?: string;
+    processDefinitionNameLike?: string;
+    includeTaskLocalVariables?: boolean;
+    includeProcessVariables?: boolean;
+    taskVariables?: VariableQuery[];
+    processInstanceVariables?: VariableQuery[];
+};
+declare function queryTasks(body: Body): Promise<ListResponse<Task>>;
 
 declare function listProcessDefinitions(params?: FlowableFetchParams): Promise<ListResponse<ProcessDefinition>>;
 
@@ -176,4 +215,4 @@ declare function suspendProcessDefinition(id: string, includeProcessInstances?: 
 
 declare function getResourceContent(deploymentId: string, resourceId: string): Promise<string | null>;
 
-export { createProcessInstanceVariables, deleteHistoricProcessInstance, deleteProcessInstance, getDeadletterJobs, getProcessInstanceVariable, getResourceContent, getTimerJobs, listHistoricTaskInstances, listHistoricVariableInstances, listProcessDefinitions, listProcessInstances, listTasks, moveDeadletterJob, moveTimerJob, queryProcessInstances, startProcessInstance, suspendProcessDefinition, updateProcessInstanceVariable };
+export { createProcessInstanceVariables, deleteHistoricProcessInstance, deleteProcessInstance, getDeadletterJobs, getProcessInstanceVariable, getResourceContent, getTimerJobs, listHistoricTaskInstances, listHistoricVariableInstances, listProcessDefinitions, listProcessInstances, listTasks, moveDeadletterJob, moveTimerJob, queryProcessInstances, queryTasks, startProcessInstance, suspendProcessDefinition, updateProcessInstanceVariable };
