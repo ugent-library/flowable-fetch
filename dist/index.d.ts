@@ -150,6 +150,10 @@ type VariableQuery = {
     operation: 'equals' | 'notEquals' | 'equalsIgnoreCase' | 'notEqualsIgnoreCase' | 'lessThan' | 'greaterThan' | 'lessThanOrEquals' | 'greaterThanOrEquals' | 'like';
     type?: VariableType;
 };
+type ErrorResponse = {
+    message: string;
+    exception: string;
+};
 
 declare function startProcessInstance(processDefinitionKey: string, variables?: Record<string, VariableValue> | Variable[]): Promise<ProcessInstance>;
 
@@ -215,4 +219,4 @@ declare function suspendProcessDefinition(id: string, includeProcessInstances?: 
 
 declare function getResourceContent(deploymentId: string, resourceId: string): Promise<string | null>;
 
-export { createProcessInstanceVariables, deleteHistoricProcessInstance, deleteProcessInstance, getDeadletterJobs, getProcessInstanceVariable, getResourceContent, getTimerJobs, listHistoricTaskInstances, listHistoricVariableInstances, listProcessDefinitions, listProcessInstances, listTasks, moveDeadletterJob, moveTimerJob, queryProcessInstances, queryTasks, startProcessInstance, suspendProcessDefinition, updateProcessInstanceVariable };
+export { ErrorResponse, HistoricTaskInstance, HistoricVariableInstance, Job, ListResponse, PagingAndSorting, ProcessDefinition, ProcessInstance, Task, Variable, VariableQuery, VariableType, VariableValue, createProcessInstanceVariables, deleteHistoricProcessInstance, deleteProcessInstance, getDeadletterJobs, getProcessInstanceVariable, getResourceContent, getTimerJobs, listHistoricTaskInstances, listHistoricVariableInstances, listProcessDefinitions, listProcessInstances, listTasks, moveDeadletterJob, moveTimerJob, queryProcessInstances, queryTasks, startProcessInstance, suspendProcessDefinition, updateProcessInstanceVariable };

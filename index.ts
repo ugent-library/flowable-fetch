@@ -1,5 +1,7 @@
 import 'dotenv/config'
 
+export * from './flowable'
+
 export * from './runtime/start-process-instance'
 export * from './runtime/list-process-instances'
 export * from './runtime/get-process-instance-variable'
