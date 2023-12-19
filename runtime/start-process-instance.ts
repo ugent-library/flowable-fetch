@@ -1,11 +1,11 @@
-import type { ProcessInstance, Variable, VariableValue } from '../flowable'
+import type { Flowable } from '../flowable'
 import flowableFetch from '../lib/flowable-fetch'
 import { objectToVariables } from '../lib/util'
 
 export async function startProcessInstance(
   processDefinitionKey: string,
-  variables: Record<string, VariableValue> | Variable[] = []
-): Promise<ProcessInstance> {
+  variables: Record<string, Flowable.VariableValue> | Flowable.Variable[] = []
+): Promise<Flowable.ProcessInstance> {
   if (typeof variables !== 'object') {
     throw new Error(
       `Invalid type for parameter 'variables' (${typeof variables}).`
@@ -27,8 +27,11 @@ export async function startProcessInstance(
     body.variables = variables
   }
 
-  return await flowableFetch<ProcessInstance>(`runtime/process-instances`, {
-    method: 'POST',
-    body,
-  })
+  return await flowableFetch<Flowable.ProcessInstance>(
+    `runtime/process-instances`,
+    {
+      method: 'POST',
+      body,
+    }
+  )
 }

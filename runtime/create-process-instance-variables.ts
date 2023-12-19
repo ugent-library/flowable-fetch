@@ -1,12 +1,12 @@
-import type { Variable, VariableValue } from '../flowable'
+import type { Flowable } from '../flowable'
 import flowableFetch from '../lib/flowable-fetch'
 import { objectToVariables } from '../lib/util'
 
 export async function createProcessInstanceVariables(
   processInstanceId: string,
-  variables: Record<string, VariableValue> | Variable[]
+  variables: Record<string, Flowable.VariableValue> | Flowable.Variable[]
 ) {
-  return await flowableFetch<Variable[]>(
+  return await flowableFetch<Flowable.Variable[]>(
     `runtime/process-instances/${processInstanceId}/variables`,
     {
       method: 'POST',

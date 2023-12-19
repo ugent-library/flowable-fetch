@@ -1,20 +1,15 @@
-import type {
-  ListResponse,
-  PagingAndSorting,
-  ProcessInstance,
-  VariableQuery,
-} from '../flowable'
+import type { Flowable } from '../flowable'
 import flowableFetch from '../lib/flowable-fetch'
 
-type Body = PagingAndSorting & {
+type Body = Flowable.PagingAndSorting & {
   processDefinitionKey?: string
-  variables?: VariableQuery[]
+  variables?: Flowable.VariableQuery[]
 }
 
 export async function queryProcessInstances(
   body: Body
-): Promise<ListResponse<ProcessInstance>> {
-  return await flowableFetch<ListResponse<ProcessInstance>>(
+): Promise<Flowable.ListResponse<Flowable.ProcessInstance>> {
+  return await flowableFetch<Flowable.ListResponse<Flowable.ProcessInstance>>(
     'query/process-instances',
     {
       method: 'POST',

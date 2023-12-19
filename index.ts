@@ -1,6 +1,6 @@
 import 'dotenv/config'
 
-export * from './flowable'
+export type { Flowable } from './flowable.d.ts'
 
 export * from './runtime/start-process-instance'
 export * from './runtime/list-process-instances'

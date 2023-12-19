@@ -1,12 +1,12 @@
-import type { Variable, VariableValue } from '../flowable'
+import type { Flowable } from '../flowable'
 import flowableFetch from '../lib/flowable-fetch'
 
 export async function updateProcessInstanceVariable(
   processInstanceId: string,
   name: string,
-  value: VariableValue
-): Promise<Variable> {
-  return await flowableFetch<Variable>(
+  value: Flowable.VariableValue
+): Promise<Flowable.Variable> {
+  return await flowableFetch<Flowable.Variable>(
     `runtime/process-instances/${processInstanceId}/variables/${name}`,
     {
       method: 'PUT',

@@ -1,9 +1,8 @@
+import type { Flowable } from '../flowable'
 import { expect } from 'vitest'
 
-import type { ListResponse } from '../flowable'
-
 export default function defaultResultSetTest<T>(
-  testCallback: () => Promise<ListResponse<T>>,
+  testCallback: () => Promise<Flowable.ListResponse<T>>,
   defaultSortColumn: string,
   expectedSetSize = 10,
   testPredicate: ((result: T) => void) | null = null

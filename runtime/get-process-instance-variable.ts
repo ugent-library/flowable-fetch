@@ -1,11 +1,11 @@
-import type { Variable, VariableValue } from '../flowable'
+import type { Flowable } from '../flowable'
 import flowableFetch from '../lib/flowable-fetch'
 
 export async function getProcessInstanceVariable(
   processInstanceId: string,
   variableName: string
-): Promise<VariableValue | null> {
-  const variableData = await flowableFetch<Variable>(
+): Promise<Flowable.VariableValue | null> {
+  const variableData = await flowableFetch<Flowable.Variable>(
     `runtime/process-instances/${processInstanceId}/variables/${variableName}`,
     {
       allowedFailStatuses: [404],

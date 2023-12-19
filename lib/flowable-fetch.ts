@@ -1,4 +1,4 @@
-import type { ErrorResponse } from '../flowable'
+import type { Flowable } from '../flowable'
 
 export type FlowableFetchParams = Record<string, string | number | boolean>
 
@@ -66,7 +66,7 @@ async function doFetch(
     return response
   } else {
     if (response.headers.get('Content-Type') === 'application/json') {
-      const error = (await response.json()) as ErrorResponse
+      const error = (await response.json()) as Flowable.ErrorResponse
 
       throw new Error(`${error.message}: ${error.exception}`)
     } else {

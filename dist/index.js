@@ -108,7 +108,8 @@ function doFetch(_0) {
     }, headersInit));
     const init = {
       method,
-      headers
+      headers,
+      cache: "no-store"
     };
     if (body) {
       init.body = JSON.stringify(body);
@@ -154,10 +155,13 @@ function startProcessInstance(_0) {
     if (variables.length) {
       body.variables = variables;
     }
-    return yield flowableFetch(`runtime/process-instances`, {
-      method: "POST",
-      body
-    });
+    return yield flowableFetch(
+      `runtime/process-instances`,
+      {
+        method: "POST",
+        body
+      }
+    );
   });
 }
 
@@ -228,18 +232,24 @@ function updateProcessInstanceVariable(processInstanceId, name, value) {
 // runtime/list-tasks.ts
 function listTasks(params) {
   return __async(this, null, function* () {
-    return yield flowableFetch("runtime/tasks", {
-      params
-    });
+    return yield flowableFetch(
+      "runtime/tasks",
+      {
+        params
+      }
+    );
   });
 }
 
 // management/get-deadletter-jobs.ts
 function getDeadletterJobs(params) {
   return __async(this, null, function* () {
-    return yield flowableFetch("management/deadletter-jobs", {
-      params
-    });
+    return yield flowableFetch(
+      "management/deadletter-jobs",
+      {
+        params
+      }
+    );
   });
 }
 
@@ -256,9 +266,12 @@ function moveDeadletterJob(jobId) {
 // management/get-timer-jobs.ts
 function getTimerJobs(params) {
   return __async(this, null, function* () {
-    return yield flowableFetch("management/timer-jobs", {
-      params
-    });
+    return yield flowableFetch(
+      "management/timer-jobs",
+      {
+        params
+      }
+    );
   });
 }
 
@@ -275,20 +288,14 @@ function moveTimerJob(jobId) {
 // history/historic-task-instances.ts
 function listHistoricTaskInstances(params) {
   return __async(this, null, function* () {
-    return yield flowableFetch(
-      "history/historic-task-instances",
-      { params }
-    );
+    return yield flowableFetch("history/historic-task-instances", { params });
   });
 }
 
 // history/historic-variable-instances.ts
 function listHistoricVariableInstances(params) {
   return __async(this, null, function* () {
-    return yield flowableFetch(
-      "history/historic-variable-instances",
-      { params }
-    );
+    return yield flowableFetch("history/historic-variable-instances", { params });
   });
 }
 
@@ -320,10 +327,13 @@ function queryProcessInstances(body) {
 // query/tasks.ts
 function queryTasks(body) {
   return __async(this, null, function* () {
-    return yield flowableFetch("query/tasks", {
-      method: "POST",
-      body
-    });
+    return yield flowableFetch(
+      "query/tasks",
+      {
+        method: "POST",
+        body
+      }
+    );
   });
 }
 

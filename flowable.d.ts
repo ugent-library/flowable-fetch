@@ -1,4 +1,4 @@
-declare namespace Flowable {
+export declare namespace Flowable {
   type ListResponse<T> = {
     data: T[]
     order: 'asc' | 'desc'
@@ -184,69 +184,3 @@ declare namespace Flowable {
     exception: string
   }
 }
-
-declare function startProcessInstance(processDefinitionKey: string, variables?: Record<string, Flowable.VariableValue> | Flowable.Variable[]): Promise<Flowable.ProcessInstance>;
-
-type FlowableFetchParams = Record<string, string | number | boolean>;
-
-declare function listProcessInstances(params?: FlowableFetchParams): Promise<Flowable.ListResponse<Flowable.ProcessInstance>>;
-
-declare function getProcessInstanceVariable(processInstanceId: string, variableName: string): Promise<Flowable.VariableValue | null>;
-
-declare function deleteProcessInstance(processInstanceId: string): Promise<void>;
-
-declare function createProcessInstanceVariables(processInstanceId: string, variables: Record<string, Flowable.VariableValue> | Flowable.Variable[]): Promise<Flowable.Variable[]>;
-
-declare function updateProcessInstanceVariable(processInstanceId: string, name: string, value: Flowable.VariableValue): Promise<Flowable.Variable>;
-
-declare function listTasks(params?: FlowableFetchParams): Promise<Flowable.ListResponse<Flowable.Task>>;
-
-declare function getDeadletterJobs(params?: FlowableFetchParams): Promise<Flowable.ListResponse<Flowable.Job>>;
-
-declare function moveDeadletterJob(jobId: string): Promise<void>;
-
-declare function getTimerJobs(params?: FlowableFetchParams): Promise<Flowable.ListResponse<Flowable.Job>>;
-
-declare function moveTimerJob(jobId: string): Promise<void>;
-
-declare function listHistoricTaskInstances(params?: FlowableFetchParams): Promise<Flowable.ListResponse<Flowable.HistoricTaskInstance>>;
-
-declare function listHistoricVariableInstances(params?: FlowableFetchParams): Promise<Flowable.ListResponse<Flowable.HistoricVariableInstance>>;
-
-declare function deleteHistoricProcessInstance(processInstanceId: string): Promise<void>;
-
-type Body$1 = Flowable.PagingAndSorting & {
-    processDefinitionKey?: string;
-    variables?: Flowable.VariableQuery[];
-};
-declare function queryProcessInstances(body: Body$1): Promise<Flowable.ListResponse<Flowable.ProcessInstance>>;
-
-type Body = Flowable.PagingAndSorting & {
-    name?: string;
-    nameLike?: string;
-    description?: string;
-    assignee?: string;
-    assigneeLike?: string;
-    unassigned?: boolean;
-    taskDefinitionKey?: string;
-    taskDefinitionKeyLike?: string;
-    processInstanceId?: string;
-    processDefinitionId?: string;
-    processDefinitionKey?: string;
-    processDefinitionKeyLike?: string;
-    processDefinitionName?: string;
-    processDefinitionNameLike?: string;
-    includeTaskLocalVariables?: boolean;
-    includeProcessVariables?: boolean;
-    taskVariables?: Flowable.VariableQuery[];
-    processInstanceVariables?: Flowable.VariableQuery[];
-};
-declare function queryTasks(body: Body): Promise<Flowable.ListResponse<Flowable.Task>>;
-
-declare function listProcessDefinitions(params?: FlowableFetchParams): Promise<Flowable.ListResponse<Flowable.ProcessDefinition>>;
-
-declare function suspendProcessDefinition(id: string, includeProcessInstances?: boolean): Promise<Flowable.ProcessDefinition>;
-
-declare function getResourceContent(deploymentId: string, resourceId: string): Promise<string | null>;
-
-export { Flowable, createProcessInstanceVariables, deleteHistoricProcessInstance, deleteProcessInstance, getDeadletterJobs, getProcessInstanceVariable, getResourceContent, getTimerJobs, listHistoricTaskInstances, listHistoricVariableInstances, listProcessDefinitions, listProcessInstances, listTasks, moveDeadletterJob, moveTimerJob, queryProcessInstances, queryTasks, startProcessInstance, suspendProcessDefinition, updateProcessInstanceVariable };
