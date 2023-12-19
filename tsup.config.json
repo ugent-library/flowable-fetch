@@ -1,6 +1,0 @@
-{
-  "entry": ["index.ts"],
-  "format": ["cjs", "esm"],
-  "dts": true,
-  "clean": true
-}
