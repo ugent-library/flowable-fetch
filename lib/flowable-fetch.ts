@@ -52,6 +52,7 @@ async function doFetch(
   const init: RequestInit = {
     method,
     headers,
+    cache: 'no-store',
   }
 
   if (body) {
