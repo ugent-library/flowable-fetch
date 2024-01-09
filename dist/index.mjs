@@ -202,6 +202,16 @@ function listTasks(params) {
   });
 }
 
+// runtime/update-task.ts
+function updateTask(taskId, taskDetails) {
+  return __async(this, null, function* () {
+    return yield flowableFetch(`runtime/tasks/${taskId}`, {
+      method: "PUT",
+      body: taskDetails
+    });
+  });
+}
+
 // management/get-deadletter-jobs.ts
 function getDeadletterJobs(params) {
   return __async(this, null, function* () {
@@ -351,5 +361,6 @@ export {
   queryTasks,
   startProcessInstance,
   suspendProcessDefinition,
-  updateProcessInstanceVariable
+  updateProcessInstanceVariable,
+  updateTask
 };

@@ -72,7 +72,8 @@ __export(flowable_fetch_exports, {
   queryTasks: () => queryTasks,
   startProcessInstance: () => startProcessInstance,
   suspendProcessDefinition: () => suspendProcessDefinition,
-  updateProcessInstanceVariable: () => updateProcessInstanceVariable
+  updateProcessInstanceVariable: () => updateProcessInstanceVariable,
+  updateTask: () => updateTask
 });
 module.exports = __toCommonJS(flowable_fetch_exports);
 var import_config = require("dotenv/config");
@@ -241,6 +242,16 @@ function listTasks(params) {
   });
 }
 
+// runtime/update-task.ts
+function updateTask(taskId, taskDetails) {
+  return __async(this, null, function* () {
+    return yield flowableFetch(`runtime/tasks/${taskId}`, {
+      method: "PUT",
+      body: taskDetails
+    });
+  });
+}
+
 // management/get-deadletter-jobs.ts
 function getDeadletterJobs(params) {
   return __async(this, null, function* () {
@@ -391,5 +402,6 @@ function getResourceContent(deploymentId, resourceId) {
   queryTasks,
   startProcessInstance,
   suspendProcessDefinition,
-  updateProcessInstanceVariable
+  updateProcessInstanceVariable,
+  updateTask
 });

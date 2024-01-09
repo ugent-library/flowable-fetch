@@ -68,12 +68,14 @@ export declare namespace Flowable {
     completed: boolean
   }
 
+  type TaskDelegationState = null | 'pending' | 'resolved'
+
   type Task = {
     id: string
     url: string
     owner: string | null
     assignee: string
-    delegationState: string | null
+    delegationState: TaskDelegationState
     name: string
     description: string
     createTime: Date

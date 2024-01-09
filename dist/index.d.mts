@@ -68,12 +68,14 @@ declare namespace Flowable {
     completed: boolean
   }
 
+  type TaskDelegationState = null | 'pending' | 'resolved'
+
   type Task = {
     id: string
     url: string
     owner: string | null
     assignee: string
-    delegationState: string | null
+    delegationState: TaskDelegationState
     name: string
     description: string
     createTime: Date
@@ -201,6 +203,18 @@ declare function updateProcessInstanceVariable(processInstanceId: string, name: 
 
 declare function listTasks(params?: FlowableFetchParams): Promise<Flowable.ListResponse<Flowable.Task>>;
 
+type TaskDetails = {
+    assignee?: string;
+    delegationState?: Flowable.TaskDelegationState;
+    description?: string;
+    dueDate?: string;
+    name?: string;
+    owner?: string;
+    parentTaskId?: string;
+    priority?: number;
+};
+declare function updateTask(taskId: string, taskDetails: TaskDetails): Promise<Flowable.Task>;
+
 declare function getDeadletterJobs(params?: FlowableFetchParams): Promise<Flowable.ListResponse<Flowable.Job>>;
 
 declare function moveDeadletterJob(jobId: string): Promise<void>;
@@ -249,4 +263,4 @@ declare function suspendProcessDefinition(id: string, includeProcessInstances?: 
 
 declare function getResourceContent(deploymentId: string, resourceId: string): Promise<string | null>;
 
-export { Flowable, createProcessInstanceVariables, deleteHistoricProcessInstance, deleteProcessInstance, getDeadletterJobs, getProcessInstanceVariable, getResourceContent, getTimerJobs, listHistoricTaskInstances, listHistoricVariableInstances, listProcessDefinitions, listProcessInstances, listTasks, moveDeadletterJob, moveTimerJob, queryProcessInstances, queryTasks, startProcessInstance, suspendProcessDefinition, updateProcessInstanceVariable };
+export { Flowable, createProcessInstanceVariables, deleteHistoricProcessInstance, deleteProcessInstance, getDeadletterJobs, getProcessInstanceVariable, getResourceContent, getTimerJobs, listHistoricTaskInstances, listHistoricVariableInstances, listProcessDefinitions, listProcessInstances, listTasks, moveDeadletterJob, moveTimerJob, queryProcessInstances, queryTasks, startProcessInstance, suspendProcessDefinition, updateProcessInstanceVariable, updateTask };
