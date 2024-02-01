@@ -16,6 +16,7 @@ export * from './management/move-deadletter-job'
 export * from './management/get-timer-jobs'
 export * from './management/move-timer-job'
 
+export * from './history/historic-process-instance'
 export * from './history/historic-task-instances'
 export * from './history/historic-variable-instances'
 export * from './history/delete-historic-process-instance'

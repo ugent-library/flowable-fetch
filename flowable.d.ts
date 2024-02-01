@@ -21,9 +21,9 @@ export declare namespace Flowable {
 
   type Variable = {
     name: string
-    value: VariableValue
+    scope?: 'global' | 'local'
     type?: VariableType
-    variableScope?: 'global' | 'local'
+    value: VariableValue
   }
 
   type ProcessDefinition = {
@@ -122,6 +122,24 @@ export declare namespace Flowable {
     tenantId: string | null
   }
 
+  type HistoricProcessInstance = {
+    id: string
+    businessKey: string
+    processDefinitionId: string
+    processDefinitionUrl: string
+    startTime: string
+    endTime: string
+    durationInMillis: number
+    startUserId: string
+    startActivityId: string
+    endActivityId: string
+    deleteReason: string | null
+    superProcessInstanceId: string | null
+    url: string
+    variables: HistoricVariableInstance[]
+    tenantId: null
+  }
+
   type HistoricTaskInstance = {
     id: string
     processDefinitionId: string
@@ -151,6 +169,7 @@ export declare namespace Flowable {
   }
 
   type HistoricVariableInstance = {
+    executionId: string
     id: string
     processInstanceId: string
     processInstanceUrl: string

@@ -1,9 +1,17 @@
 import flowableFetch from '../lib/flowable-fetch'
 
 export async function deleteProcessInstance(
-  processInstanceId: string
+  processInstanceId: string,
+  deleteReason?: string
 ): Promise<void> {
-  await flowableFetch(`runtime/process-instances/${processInstanceId}`, {
-    method: 'DELETE',
-  })
+  const query = deleteReason
+    ? '?' + new URLSearchParams({ deleteReason }).toString()
+    : ''
+
+  await flowableFetch(
+    `runtime/process-instances/${processInstanceId}${query}`,
+    {
+      method: 'DELETE',
+    }
+  )
 }

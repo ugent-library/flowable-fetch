@@ -153,11 +153,15 @@ function getProcessInstanceVariable(processInstanceId, variableName) {
 }
 
 // runtime/delete-process-instance.ts
-function deleteProcessInstance(processInstanceId) {
+function deleteProcessInstance(processInstanceId, deleteReason) {
   return __async(this, null, function* () {
-    yield flowableFetch(`runtime/process-instances/${processInstanceId}`, {
-      method: "DELETE"
-    });
+    const query = deleteReason ? "?" + new URLSearchParams({ deleteReason }).toString() : "";
+    yield flowableFetch(
+      `runtime/process-instances/${processInstanceId}${query}`,
+      {
+        method: "DELETE"
+      }
+    );
   });
 }
 
@@ -256,6 +260,15 @@ function moveTimerJob(jobId) {
   });
 }
 
+// history/historic-process-instance.ts
+function getHistoricProcessInstance(processInstanceId) {
+  return __async(this, null, function* () {
+    return yield flowableFetch(
+      `history/historic-process-instances/${processInstanceId}`
+    );
+  });
+}
+
 // history/historic-task-instances.ts
 function listHistoricTaskInstances(params) {
   return __async(this, null, function* () {
@@ -347,6 +360,7 @@ export {
   deleteHistoricProcessInstance,
   deleteProcessInstance,
   getDeadletterJobs,
+  getHistoricProcessInstance,
   getProcessInstanceVariable,
   getResourceContent,
   getTimerJobs,

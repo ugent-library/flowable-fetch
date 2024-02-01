@@ -21,9 +21,9 @@ declare namespace Flowable {
 
   type Variable = {
     name: string
-    value: VariableValue
+    scope?: 'global' | 'local'
     type?: VariableType
-    variableScope?: 'global' | 'local'
+    value: VariableValue
   }
 
   type ProcessDefinition = {
@@ -122,6 +122,24 @@ declare namespace Flowable {
     tenantId: string | null
   }
 
+  type HistoricProcessInstance = {
+    id: string
+    businessKey: string
+    processDefinitionId: string
+    processDefinitionUrl: string
+    startTime: string
+    endTime: string
+    durationInMillis: number
+    startUserId: string
+    startActivityId: string
+    endActivityId: string
+    deleteReason: string | null
+    superProcessInstanceId: string | null
+    url: string
+    variables: HistoricVariableInstance[]
+    tenantId: null
+  }
+
   type HistoricTaskInstance = {
     id: string
     processDefinitionId: string
@@ -151,6 +169,7 @@ declare namespace Flowable {
   }
 
   type HistoricVariableInstance = {
+    executionId: string
     id: string
     processInstanceId: string
     processInstanceUrl: string
@@ -195,7 +214,7 @@ declare function listProcessInstances(params?: FlowableFetchParams): Promise<Flo
 
 declare function getProcessInstanceVariable(processInstanceId: string, variableName: string): Promise<Flowable.VariableValue | null>;
 
-declare function deleteProcessInstance(processInstanceId: string): Promise<void>;
+declare function deleteProcessInstance(processInstanceId: string, deleteReason?: string): Promise<void>;
 
 declare function createProcessInstanceVariables(processInstanceId: string, variables: Record<string, Flowable.VariableValue> | Flowable.Variable[]): Promise<Flowable.Variable[]>;
 
@@ -222,6 +241,8 @@ declare function moveDeadletterJob(jobId: string): Promise<void>;
 declare function getTimerJobs(params?: FlowableFetchParams): Promise<Flowable.ListResponse<Flowable.Job>>;
 
 declare function moveTimerJob(jobId: string): Promise<void>;
+
+declare function getHistoricProcessInstance(processInstanceId: string): Promise<Flowable.HistoricProcessInstance>;
 
 declare function listHistoricTaskInstances(params?: FlowableFetchParams): Promise<Flowable.ListResponse<Flowable.HistoricTaskInstance>>;
 
@@ -263,4 +284,4 @@ declare function suspendProcessDefinition(id: string, includeProcessInstances?: 
 
 declare function getResourceContent(deploymentId: string, resourceId: string): Promise<string | null>;
 
-export { Flowable, createProcessInstanceVariables, deleteHistoricProcessInstance, deleteProcessInstance, getDeadletterJobs, getProcessInstanceVariable, getResourceContent, getTimerJobs, listHistoricTaskInstances, listHistoricVariableInstances, listProcessDefinitions, listProcessInstances, listTasks, moveDeadletterJob, moveTimerJob, queryProcessInstances, queryTasks, startProcessInstance, suspendProcessDefinition, updateProcessInstanceVariable, updateTask };
+export { Flowable, createProcessInstanceVariables, deleteHistoricProcessInstance, deleteProcessInstance, getDeadletterJobs, getHistoricProcessInstance, getProcessInstanceVariable, getResourceContent, getTimerJobs, listHistoricTaskInstances, listHistoricVariableInstances, listProcessDefinitions, listProcessInstances, listTasks, moveDeadletterJob, moveTimerJob, queryProcessInstances, queryTasks, startProcessInstance, suspendProcessDefinition, updateProcessInstanceVariable, updateTask };
