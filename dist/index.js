@@ -52,8 +52,8 @@ var __async = (__this, __arguments, generator) => {
 };
 
 // index.ts
-var flowable_fetch_exports = {};
-__export(flowable_fetch_exports, {
+var index_exports = {};
+__export(index_exports, {
   createProcessInstanceVariables: () => createProcessInstanceVariables,
   deleteHistoricProcessInstance: () => deleteHistoricProcessInstance,
   deleteProcessInstance: () => deleteProcessInstance,
@@ -76,7 +76,7 @@ __export(flowable_fetch_exports, {
   updateProcessInstanceVariable: () => updateProcessInstanceVariable,
   updateTask: () => updateTask
 });
-module.exports = __toCommonJS(flowable_fetch_exports);
+module.exports = __toCommonJS(index_exports);
 var import_config = require("dotenv/config");
 
 // lib/flowable-fetch.ts
